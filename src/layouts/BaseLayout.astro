@@ -1,0 +1,130 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = "Solidara supports people's learning for life, through digital skills, sustainable living, active citizenship, and lifelong learning.",
+} = Astro.props;
+
+const navLinks = [
+  { label: 'About us', href: '/about' },
+  { label: 'Activities', href: '/activities' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Shape with us', href: '/shape-with-us' },
+  { label: 'News', href: '/news' },
+  { label: 'Contact us', href: '/contact' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/images/logo.jpg" />
+    <title>{title} · Solidara</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="/" class="logo-link">
+          <img src="/images/logo.jpg" alt="Stichting Solidara" width="140" />
+        </a>
+        <nav class="site-nav">
+          {navLinks.map((link) => (
+            <a href={link.href}>{link.label}</a>
+          ))}
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="footer-motto">People first, at every stage of life.</p>
+        <nav class="footer-nav">
+          {navLinks.map((link) => (
+            <a href={link.href}>{link.label}</a>
+          ))}
+        </nav>
+      </div>
+    </footer>
+
+    <style>
+      .site-header {
+        border-bottom: 1px solid var(--color-surface);
+      }
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-block: 20px;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+      .logo-link img {
+        background: transparent;
+      }
+      .site-nav {
+        display: flex;
+        gap: 28px;
+        font-size: 14px;
+      }
+      .site-nav a:hover {
+        color: var(--color-teal);
+      }
+      .site-footer {
+        background: var(--color-ink);
+        margin-top: 96px;
+      }
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-block: 40px;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+      .footer-motto {
+        font-family: var(--font-display);
+        font-size: 18px;
+        font-weight: 500;
+        color: var(--color-white);
+        margin: 0;
+      }
+      .footer-nav {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        font-size: 13px;
+      }
+      .footer-nav a {
+        color: var(--color-surface);
+        opacity: 0.75;
+      }
+      .footer-nav a:hover {
+        opacity: 1;
+      }
+      @media (max-width: 640px) {
+        .site-nav {
+          display: none;
+        }
+      }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,162 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const teasers = [
+  {
+    image: '/images/teaser-belief.jpg',
+    heading: 'Our belief',
+    text: "A good society starts with people who feel capable, respected and involved. That's where we begin too, with the human being we are facing.",
+    linkLabel: 'Read our story',
+    href: '/about',
+  },
+  {
+    image: '/images/teaser-activities.jpg',
+    heading: 'What we do',
+    text: 'We put that belief into practice through five kinds of activities: learning mobilities, intergenerational dialogue, digital skills, capacity building for trainers, and, newly, the green transition.',
+    linkLabel: 'Explore what we do',
+    href: '/activities',
+  },
+  {
+    image: '/images/teaser-shapewithus.jpg',
+    heading: 'Shape with us',
+    text: "Solidara isn't only a place people come to, it's a place people can help build.",
+    linkLabel: 'Shape with us',
+    href: '/shape-with-us',
+    accent: true,
+  },
+];
+---
+
+<BaseLayout title="Home">
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <h1>People first, at every stage of life.</h1>
+        <p class="hero-lede">
+          Solidara supports people's learning for life, through digital
+          skills, sustainable living, active citizenship, and lifelong
+          learning, wherever the gaps are.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="/about">Read our story</a>
+          <a class="button button-secondary" href="/shape-with-us">Shape with us</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <img src="/images/hero-home.jpg" alt="People of different ages learning together at Solidara" width="800" height="533" />
+      </div>
+    </div>
+  </section>
+
+  <section class="teasers">
+    <div class="container teaser-grid">
+      {teasers.map((teaser) => (
+        <a class:list={['teaser-card', { accent: teaser.accent }]} href={teaser.href}>
+          <img src={teaser.image} alt="" width="900" height="900" />
+          <div class="teaser-body">
+            <span class="eyebrow-dot"></span>
+            <h2>{teaser.heading}</h2>
+            <p>{teaser.text}</p>
+            <span class="teaser-link">{teaser.linkLabel} &rarr;</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <style>
+    .hero {
+      padding-block: 64px 88px;
+      background: var(--color-surface);
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .hero-copy h1 {
+      font-size: 48px;
+      max-width: 480px;
+    }
+    .hero-lede {
+      margin-top: 24px;
+      font-size: 17px;
+      max-width: 440px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .hero-media img {
+      border-radius: 12px;
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+    }
+
+    .teasers {
+      padding-block: 88px;
+    }
+    .teaser-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .teaser-card {
+      display: block;
+      border: 1px solid var(--color-surface);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.15s ease;
+    }
+    .teaser-card:hover {
+      border-color: var(--color-teal);
+    }
+    .teaser-card.accent:hover {
+      border-color: var(--color-terracotta);
+    }
+    .teaser-card img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+    .teaser-body {
+      padding: 24px;
+    }
+    .teaser-body .eyebrow-dot {
+      margin-bottom: 14px;
+    }
+    .teaser-card.accent .eyebrow-dot {
+      background: var(--color-terracotta);
+    }
+    .teaser-body h2 {
+      font-size: 19px;
+      margin-bottom: 10px;
+    }
+    .teaser-body p {
+      font-size: 14px;
+    }
+    .teaser-link {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-teal);
+    }
+    .teaser-card.accent .teaser-link {
+      color: var(--color-terracotta);
+    }
+
+    @media (max-width: 860px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+      .teaser-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</BaseLayout>
