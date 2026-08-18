@@ -1,0 +1,229 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const doors = [
+  {
+    heading: 'If you have an idea',
+    text: "Maybe it's a workshop, a small local activity, or something bigger you've been sitting on. Maybe you're not one person but an informal group, unregistered, just people who already do things together. Either way, you don't need a finished plan or a funding proposal already written, just the idea and why it matters to you. Tell us about it, and we'll figure out together whether, and how, it could become real.",
+  },
+  {
+    heading: 'If you represent an organisation',
+    text: "Local, national, or from elsewhere in Europe: if your work touches lifelong learning, digital skills, sustainability, or active citizenship, there's probably a reason for us to talk. We're open to partnerships at every stage, from a first exploratory conversation to joining a funding proposal together.",
+  },
+  {
+    heading: 'If you want to get involved directly',
+    text: "Mentor, trainer, facilitator, volunteer, or simply someone who wants to join an activity and see where it leads: our work runs on people willing to show up and share what they know, not from the front of a room, but alongside people learning it. Whatever your experience, and whatever level of involvement feels right, we'd like to hear from you.",
+  },
+];
+---
+
+<BaseLayout
+  title="Shape with us"
+  description="Solidara isn't only a place people come to, it's a place people can help build. Here's how to get involved."
+>
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <h1>Shape with us</h1>
+        <p class="hero-lede">
+          On our About page we say something simple: Solidara isn't only a
+          place people come to, it's a place people can help build. This
+          page is where that stops being a line and starts being an actual
+          door. If something here speaks to you, there's more than one way
+          in.
+        </p>
+      </div>
+      <div class="hero-media">
+        <img
+          src="/images/shape-with-us-door.jpg"
+          alt=""
+          width="1200"
+          height="900"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="doors">
+    <div class="container doors-grid">
+      {doors.map((door) => (
+        <div class="door-card">
+          <span class="eyebrow-dot"></span>
+          <h2>{door.heading}</h2>
+          <p>{door.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="how-we-work">
+    <div class="container narrow">
+      <h2>How we work once you're in</h2>
+      <p>
+        Nothing here works top-down. We build things side by side with the
+        people involved, adjusting as we go, not handing over a finished
+        programme and asking people to fit into it. Expect conversation
+        before commitment, and room to change direction if something isn't
+        working.
+      </p>
+      <p>
+        Because a good society isn't handed to you, it's shaped by the
+        people who show up to build it. We hope that includes you.
+      </p>
+    </div>
+  </section>
+
+  <section class="contribution-form">
+    <div class="container narrow">
+      <h2>Tell us more</h2>
+      <form name="shape-with-us" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks">
+        <input type="hidden" name="form-name" value="shape-with-us" />
+        <p class="hidden-field">
+          <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+        </p>
+
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="who">I am</label>
+        <select id="who" name="who" required>
+          <option value="">Select one</option>
+          <option value="an individual">An individual</option>
+          <option value="an informal group">An informal group</option>
+          <option value="an organisation">An organisation</option>
+        </select>
+
+        <label for="about">This is about</label>
+        <select id="about" name="about" required>
+          <option value="">Select one</option>
+          <option value="an idea I have">An idea I have</option>
+          <option value="a partnership">A partnership</option>
+          <option value="getting involved directly">Getting involved directly</option>
+        </select>
+
+        <label for="message">Tell us in a few lines</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit" class="button button-accent">Send</button>
+      </form>
+    </div>
+  </section>
+
+  <style>
+    .hero {
+      padding-block: 64px 88px;
+      background: var(--color-surface);
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .hero-copy h1 {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+    .hero-lede {
+      font-size: 16px;
+      max-width: 460px;
+    }
+    .hero-media img {
+      border-radius: 12px;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    .doors {
+      padding-block: 72px;
+    }
+    .doors-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .door-card h2 {
+      font-size: 18px;
+      margin: 14px 0 10px;
+    }
+    .door-card p {
+      font-size: 14px;
+    }
+
+    .how-we-work {
+      padding-block: 24px 72px;
+      border-top: 1px solid var(--color-surface);
+    }
+    .narrow {
+      max-width: 640px;
+    }
+    .how-we-work h2 {
+      font-size: 22px;
+      margin-bottom: 18px;
+    }
+    .how-we-work p {
+      font-size: 15px;
+      margin-bottom: 16px;
+    }
+
+    .contribution-form {
+      padding-block: 24px 96px;
+      border-top: 1px solid var(--color-surface);
+    }
+    .contribution-form h2 {
+      font-size: 22px;
+      margin-bottom: 24px;
+    }
+    .contribution-form form {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .contribution-form label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-ink);
+      margin-top: 16px;
+    }
+    .contribution-form input,
+    .contribution-form select,
+    .contribution-form textarea {
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--color-ink);
+      padding: 11px 14px;
+      border: 1px solid var(--color-surface);
+      border-radius: 8px;
+      background: var(--color-white);
+    }
+    .contribution-form input:focus,
+    .contribution-form select:focus,
+    .contribution-form textarea:focus {
+      outline: 2px solid var(--color-teal);
+      outline-offset: 1px;
+    }
+    .hidden-field {
+      position: absolute;
+      left: -5000px;
+    }
+    .button-accent {
+      margin-top: 28px;
+      background: var(--color-terracotta);
+      color: var(--color-white);
+      align-self: flex-start;
+    }
+
+    @media (max-width: 860px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+      .doors-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</BaseLayout>

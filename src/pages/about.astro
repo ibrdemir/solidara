@@ -1,0 +1,162 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About us"
+  description="A good society is made of people who feel capable, respected and involved. That's where Solidara begins too."
+>
+  <section class="about-header">
+    <div class="container narrow">
+      <h1>People first, at every stage of life.</h1>
+    </div>
+  </section>
+
+  <section class="about-content">
+    <div class="container narrow">
+      <p>
+        "Participatiesamenleving" was the Dutch word of the year in 2013,
+        meaning "participation society." It captured something people were
+        already feeling: a good life, and a good society, isn't just handed
+        to you by institutions. You take part in shaping it.
+      </p>
+      <p>
+        That idea is older than 2013. Centuries earlier, the philosopher
+        Spinoza, writing in this same country, argued that the whole point
+        of a well-run society isn't to control people, but to give them the
+        safety and freedom to develop their own minds, and think for
+        themselves.
+      </p>
+      <p>
+        It's even written into Dutch law today. The Constitution commits the
+        state to creating room for people's <em>ontplooiing</em> (their
+        social and cultural development), and for how they spend their free
+        time. Growth. Becoming. Hobbies included.
+      </p>
+      <p>That's the frame Solidara wants to contribute to.</p>
+    </div>
+  </section>
+
+  <section class="about-image">
+    <div class="container">
+      <img
+        src="/images/about-story.jpg"
+        alt=""
+        width="1600"
+        height="900"
+      />
+    </div>
+  </section>
+
+  <section class="about-content">
+    <div class="container narrow">
+      <p>
+        We start from a simple belief: a good society is made of people who
+        feel capable, respected and involved. That's where we begin too,
+        with the human being we are facing.
+      </p>
+    </div>
+  </section>
+
+  <blockquote class="pull-quote">
+    <div class="container narrow">
+      <p>Not a target group. Not a label. A human being.</p>
+    </div>
+  </blockquote>
+
+  <section class="about-content">
+    <div class="container narrow">
+      <p>
+        School ends. Some things turn out to have never really been taught.
+        For some, school ended too early, or barely started at all. Either
+        way, that's where we work.
+      </p>
+      <p>
+        We support people's learning for life. The professional skills they
+        need, the personal ones they want, even the hobby they never got
+        round to: how to survive the digital madness, how to speak up in a
+        meeting, how to live a bit more sustainably, how to feel part of
+        your neighbourhood.
+      </p>
+      <p>
+        Most of what happens at Solidara is people learning from each other:
+        sharing what they know, trying things together, figuring it out
+        side by side. Where it genuinely helps, an experienced trainer or
+        instructor joins in. But they're there to support the learning, not
+        to run it.
+      </p>
+      <p>
+        And Solidara tries to work the same way. We're not only a place
+        people come to; we're a place people can help build. If these aims
+        are yours too, there's room here to shape what we do, not just take
+        part in it. In its own small way, that's what a participation
+        society looks like from the inside.
+      </p>
+      <p class="cta-line"><a href="/shape-with-us">Shape with us &rarr;</a></p>
+    </div>
+  </section>
+
+  <style>
+    .narrow {
+      max-width: 640px;
+    }
+
+    .about-header {
+      padding-block: 64px 8px;
+    }
+    .about-header h1 {
+      font-size: 34px;
+    }
+
+    .about-content {
+      padding-block: 24px;
+    }
+    .about-content p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    .about-content p:last-child {
+      margin-bottom: 0;
+    }
+    .about-content em {
+      font-style: italic;
+      color: var(--color-ink);
+    }
+
+    .about-image {
+      padding-block: 24px;
+    }
+    .about-image img {
+      width: 100%;
+      border-radius: 12px;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    .pull-quote {
+      margin: 40px 0;
+      padding-block: 44px;
+      border-top: 1px solid var(--color-surface);
+      border-bottom: 1px solid var(--color-surface);
+    }
+    .pull-quote p {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 26px;
+      line-height: 1.4;
+      color: var(--color-teal);
+      margin: 0;
+    }
+
+    .cta-line {
+      margin-top: 32px !important;
+      font-weight: 500;
+    }
+    .cta-line a {
+      color: var(--color-teal);
+    }
+    .cta-line a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</BaseLayout>

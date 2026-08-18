@@ -6,8 +6,8 @@
   --color-slate: #5C6D71;
   --color-terracotta: #E8734A;
 
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Sora', system-ui, -apple-system, sans-serif;
+  --font-body: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
 
   --max-width: 1160px;
 }

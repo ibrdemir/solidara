@@ -1,0 +1,117 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { activityLabels } from '../../data/activities.js';
+
+const allProjects = await getCollection('projects');
+const statusOrder = { Ongoing: 0, Upcoming: 1, Completed: 2 };
+const projects = allProjects.sort(
+  (a, b) => statusOrder[a.data.status] - statusOrder[b.data.status]
+);
+---
+
+<BaseLayout
+  title="Projects"
+  description="Real projects Solidara takes part in, from Erasmus+ exchanges to European Solidarity Corps activities."
+>
+  <section class="page-header">
+    <div class="container narrow">
+      <h1>Projects</h1>
+      <p class="intro">
+        Real projects Solidara is part of, funded through Erasmus+ and
+        similar programmes, tagged by which activity they belong to.
+      </p>
+    </div>
+  </section>
+
+  <section class="project-grid-section">
+    <div class="container project-grid">
+      {projects.map((project) => (
+        <a class="project-card" href={`/projects/${project.id}`}>
+          <div class="project-media">
+            <img src={project.data.image} alt="" width="1600" height="900" />
+          </div>
+          <div class="project-body">
+            <div class="tags">
+              <span class="status-pill">{project.data.status}</span>
+              <span class="activity-tag">{activityLabels[project.data.activity]}</span>
+            </div>
+            <h2>{project.data.title}</h2>
+            <p>{project.data.summary}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <style>
+    .page-header {
+      padding-block: 64px 16px;
+    }
+    .narrow {
+      max-width: 640px;
+    }
+    .page-header h1 {
+      font-size: 34px;
+      margin-bottom: 16px;
+    }
+    .intro {
+      font-size: 15px;
+    }
+
+    .project-grid-section {
+      padding-block: 32px 96px;
+    }
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+    .project-card {
+      display: block;
+      border: 1px solid var(--color-surface);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.15s ease;
+    }
+    .project-card:hover {
+      border-color: var(--color-teal);
+    }
+    .project-media img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+    .project-body {
+      padding: 20px;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .status-pill {
+      font-size: 11px;
+      color: var(--color-slate);
+      background: var(--color-surface);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .activity-tag {
+      font-size: 11px;
+      color: var(--color-teal);
+      background: rgba(0, 179, 204, 0.1);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .project-body h2 {
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+    .project-body p {
+      font-size: 13px;
+      line-height: 1.6;
+    }
+  </style>
+</BaseLayout>

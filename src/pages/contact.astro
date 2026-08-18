@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact us"
+  description="Have a question, an idea, or just want to say hello? Reach Solidara at info@solidara.org."
+>
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <h1>Contact us</h1>
+        <p class="hero-lede">
+          Have a question, an idea, or just want to say hello? We'd love to
+          hear from you.
+        </p>
+        <a class="email-link" href="mailto:info@solidara.org">info@solidara.org</a>
+      </div>
+      <div class="hero-media">
+        <img src="/images/contact-photo.jpg" alt="" width="1200" height="900" />
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-form">
+    <div class="container narrow">
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks">
+        <input type="hidden" name="form-name" value="contact" />
+        <p class="hidden-field">
+          <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+        </p>
+
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit" class="button button-primary">Send</button>
+      </form>
+    </div>
+  </section>
+
+  <style>
+    .hero {
+      padding-block: 64px 72px;
+      background: var(--color-surface);
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .hero-copy h1 {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+    .hero-lede {
+      font-size: 16px;
+      max-width: 420px;
+      margin-bottom: 24px;
+    }
+    .email-link {
+      display: inline-block;
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--color-teal);
+    }
+    .email-link:hover {
+      text-decoration: underline;
+    }
+    .hero-media img {
+      border-radius: 12px;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    .contact-form {
+      padding-block: 72px 96px;
+    }
+    .narrow {
+      max-width: 560px;
+    }
+    .contact-form form {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .contact-form label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-ink);
+      margin-top: 16px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--color-ink);
+      padding: 11px 14px;
+      border: 1px solid var(--color-surface);
+      border-radius: 8px;
+      background: var(--color-white);
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: 2px solid var(--color-teal);
+      outline-offset: 1px;
+    }
+    .hidden-field {
+      position: absolute;
+      left: -5000px;
+    }
+    .contact-form button {
+      margin-top: 28px;
+      align-self: flex-start;
+    }
+
+    @media (max-width: 860px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</BaseLayout>

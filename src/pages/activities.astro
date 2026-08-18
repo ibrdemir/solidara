@@ -1,0 +1,144 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const activities = [
+  {
+    image: '/images/activities-learning-mobilities.jpg',
+    status: 'In development',
+    heading: 'Learning mobilities',
+    text: "Learning doesn't retire. We co-create exchanges and international learning journeys that bring people together across cultures and borders, no matter what stage of life they're in. Built on non-formal education, these journeys turn everyday moments (a shared meal, a missed train, a language worked through together) into real learning.",
+  },
+  {
+    image: '/images/activities-intergenerational.jpg',
+    status: 'In development',
+    heading: 'Intergenerational learning & dialogue',
+    text: 'We create spaces where people of different ages meet, share real experience, and learn from each other. Lived experience and new perspective count equally here. This is where "a human being, not a label" stops being a line on the About page and becomes practice: nobody in the room is only "young" or only "adult."',
+  },
+  {
+    image: '/images/activities-digital-skills.jpg',
+    status: 'Under preparation',
+    heading: 'Digital skills & digital confidence',
+    text: "We help people build the skills and steadiness to learn, create, and take part in today's world online, not just use the tools, but navigate them with some confidence. In practice: digital storytelling, safe participation online, and support for people who feel like the digital world is moving faster than they are.",
+  },
+  {
+    image: '/images/activities-capacity-building.jpg',
+    status: 'In development',
+    heading: 'Capacity building for trainers & facilitators',
+    text: 'We support the people who support others: youth workers, adult educators, trainers, volunteers, community leaders, through peer learning, training activities, and international cooperation. Because non-formal education only works if the people running it are learning too.',
+  },
+  {
+    image: '/images/activities-green-transition.jpg',
+    status: 'Being shaped',
+    heading: 'Green transition & sustainable living',
+    text: "Care for the environment isn't new here, it already shows up quietly inside our other activities: how we run an exchange, how we plan an event, small sustainable habits built into non-formal learning wherever they fit naturally. What's changing now is that we're shaping this into a field of its own: dedicated activities where environmental awareness and sustainable-living skills are the point, not a side effect.",
+  },
+];
+---
+
+<BaseLayout
+  title="Activities"
+  description="Five kinds of activities Solidara runs: learning mobilities, intergenerational dialogue, digital skills, capacity building, and the green transition."
+>
+  <section class="page-header">
+    <div class="container">
+      <h1>Activities</h1>
+      <p class="intro">
+        We believe learning works best side by side, not from the front of a
+        room. Most of what happens at Solidara is people learning from each
+        other: sharing what they know, trying things out together, figuring
+        it out as they go. Where it genuinely helps, an experienced trainer
+        or facilitator joins in, not to run the session, but to support it.
+      </p>
+      <p class="intro">
+        Here's how we currently put that into practice, and one direction
+        we're actively building toward.
+      </p>
+    </div>
+  </section>
+
+  <section class="activity-list">
+    <div class="container">
+      {activities.map((activity, i) => (
+        <div class:list={['activity-row', { reverse: i % 2 === 1 }]}>
+          <div class="activity-media">
+            <img src={activity.image} alt="" width="1200" height="800" />
+          </div>
+          <div class="activity-body">
+            <span class="status-pill">{activity.status}</span>
+            <h2>
+              <span class="eyebrow-dot"></span>
+              {activity.heading}
+            </h2>
+            <p>{activity.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <style>
+    .page-header {
+      padding-block: 64px 24px;
+    }
+    .page-header h1 {
+      font-size: 34px;
+      margin-bottom: 24px;
+    }
+    .intro {
+      max-width: 560px;
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+
+    .activity-list {
+      padding-block: 24px 88px;
+    }
+    .activity-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      padding-block: 40px;
+      border-top: 1px solid var(--color-surface);
+    }
+    .activity-row.reverse .activity-media {
+      order: 2;
+    }
+    .activity-media img {
+      border-radius: 12px;
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+    }
+    .status-pill {
+      display: inline-block;
+      font-size: 12px;
+      color: var(--color-slate);
+      background: var(--color-surface);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    .activity-body h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    .activity-body p {
+      font-size: 14px;
+    }
+
+    @media (max-width: 780px) {
+      .activity-row,
+      .activity-row.reverse .activity-media {
+        grid-template-columns: 1fr;
+        order: initial;
+      }
+      .activity-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</BaseLayout>

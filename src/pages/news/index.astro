@@ -1,0 +1,103 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const allNews = await getCollection('news');
+const items = allNews.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+---
+
+<BaseLayout
+  title="News"
+  description="Stories, articles, and calls from Solidara."
+>
+  <section class="page-header">
+    <div class="container narrow">
+      <h1>News</h1>
+    </div>
+  </section>
+
+  <section class="news-list-section">
+    <div class="container narrow">
+      {items.map((item) => (
+        <a class="news-row" href={`/news/${item.id}`}>
+          <div class="news-meta">
+            <time>{formatDate(item.data.date)}</time>
+            <span class={`category-tag category-${item.data.category.toLowerCase()}`}>
+              {item.data.category}
+            </span>
+          </div>
+          <h2>{item.data.title}</h2>
+          <p>{item.data.summary}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <style>
+    .page-header {
+      padding-block: 64px 16px;
+    }
+    .narrow {
+      max-width: 640px;
+    }
+    .page-header h1 {
+      font-size: 34px;
+    }
+
+    .news-list-section {
+      padding-block: 24px 96px;
+    }
+    .news-row {
+      display: block;
+      padding-block: 28px;
+      border-top: 1px solid var(--color-surface);
+    }
+    .news-row:last-child {
+      border-bottom: 1px solid var(--color-surface);
+    }
+    .news-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .news-meta time {
+      font-size: 12px;
+      color: var(--color-slate);
+    }
+    .category-tag {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .category-news {
+      color: var(--color-slate);
+      background: var(--color-surface);
+    }
+    .category-article {
+      color: var(--color-teal);
+      background: rgba(0, 179, 204, 0.1);
+    }
+    .category-call {
+      color: var(--color-terracotta);
+      background: rgba(232, 115, 74, 0.1);
+    }
+    .news-row h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    .news-row p {
+      font-size: 14px;
+    }
+    .news-row:hover h2 {
+      color: var(--color-teal);
+    }
+  </style>
+</BaseLayout>

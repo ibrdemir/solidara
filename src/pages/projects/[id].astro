@@ -1,0 +1,244 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { activityLabels } from '../../data/activities.js';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const p = project.data;
+
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' });
+}
+---
+
+<BaseLayout title={p.title} description={p.summary}>
+  <section class="project-hero">
+    <div class="container">
+      <img src={p.image} alt="" width="1600" height="900" />
+    </div>
+  </section>
+
+  <section class="project-header">
+    <div class="container">
+      <div class="tags">
+        <span class="status-pill">{p.status}</span>
+        <span class="activity-tag">{activityLabels[p.activity]}</span>
+      </div>
+      <h1>{p.title}</h1>
+    </div>
+  </section>
+
+  <section class="project-content">
+    <div class="container content-grid">
+      <div class="main-column">
+        <p class="lead">{p.summary}</p>
+
+        <h2>Key activities</h2>
+        <ul class="dot-list">
+          {p.keyActivities.map((item) => (
+            <li>
+              <span class="eyebrow-dot"></span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+
+        <h2>Who it's for</h2>
+        <p>{p.targetGroup}</p>
+      </div>
+
+      <aside class="fact-panel">
+        <div class="fact-row">
+          <span class="fact-label">Role</span>
+          <span class="fact-value">{p.role}</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">Funding</span>
+          <span class="fact-value">{p.fundingProgramme}</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">Coordinator</span>
+          <span class="fact-value">{p.coordinator}</span>
+        </div>
+        {p.partners.length > 0 && (
+          <div class="fact-row">
+            <span class="fact-label">Partners</span>
+            <span class="fact-value">
+              {p.partners.map((partner) => (
+                <span class="partner-line">
+                  {partner.name}
+                  {partner.country ? ` — ${partner.country}` : ''}
+                  {partner.note ? ` (${partner.note})` : ''}
+                </span>
+              ))}
+            </span>
+          </div>
+        )}
+        <div class="fact-row">
+          <span class="fact-label">Duration</span>
+          <span class="fact-value">
+            {formatDate(p.startDate)} – {formatDate(p.endDate)}
+            {p.durationLabel ? ` (${p.durationLabel})` : ''}
+          </span>
+        </div>
+        {p.phases.length > 0 && (
+          <div class="fact-row">
+            <span class="fact-label">Phases</span>
+            <span class="fact-value">
+              {p.phases.map((phase) => (
+                <span class="partner-line">{phase}</span>
+              ))}
+            </span>
+          </div>
+        )}
+      </aside>
+    </div>
+
+    <div class="container">
+      <a class="back-link" href="/projects">&larr; Back to projects</a>
+    </div>
+  </section>
+
+  <style>
+    .project-hero {
+      padding-block: 32px 0;
+    }
+    .project-hero img {
+      width: 100%;
+      border-radius: 12px;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    .project-header {
+      padding-block: 24px 16px;
+    }
+    .tags {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .status-pill {
+      font-size: 11px;
+      color: var(--color-slate);
+      background: var(--color-surface);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .activity-tag {
+      font-size: 11px;
+      color: var(--color-teal);
+      background: rgba(0, 179, 204, 0.1);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .project-header h1 {
+      font-size: 30px;
+      max-width: 700px;
+    }
+
+    .project-content {
+      padding-block: 24px 32px;
+    }
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .main-column .lead {
+      font-size: 16px;
+      margin-bottom: 32px;
+    }
+    .main-column h2 {
+      font-size: 18px;
+      margin-bottom: 14px;
+      margin-top: 32px;
+    }
+    .main-column h2:first-of-type {
+      margin-top: 0;
+    }
+    .main-column p {
+      font-size: 14px;
+    }
+    .dot-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .dot-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--color-slate);
+    }
+    .dot-list .eyebrow-dot {
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+
+    .fact-panel {
+      border: 1px solid var(--color-surface);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .fact-row {
+      padding-block: 12px;
+      border-top: 1px solid var(--color-surface);
+    }
+    .fact-row:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+    .fact-label {
+      display: block;
+      font-size: 11px;
+      color: var(--color-slate);
+      margin-bottom: 6px;
+    }
+    .fact-value {
+      display: block;
+      font-size: 13px;
+      color: var(--color-ink);
+      font-weight: 500;
+    }
+    .partner-line {
+      display: block;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+    .partner-line:last-child {
+      margin-bottom: 0;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 32px;
+      font-size: 13px;
+      color: var(--color-teal);
+      font-weight: 500;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 780px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</BaseLayout>
