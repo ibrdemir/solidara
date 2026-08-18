@@ -45,7 +45,23 @@ const navLinks = [
             <a href={link.href}>{link.label}</a>
           ))}
         </nav>
+        <button
+          class="menu-toggle"
+          id="menu-toggle"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
+      <nav class="mobile-nav" id="mobile-nav">
+        {navLinks.map((link) => (
+          <a href={link.href}>{link.label}</a>
+        ))}
+      </nav>
     </header>
 
     <main>
@@ -111,6 +127,51 @@ const navLinks = [
       .site-nav a:hover {
         color: var(--color-teal);
       }
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+      }
+      .menu-toggle span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: var(--color-ink);
+        transition: transform 0.2s ease, opacity 0.2s ease;
+      }
+      .menu-toggle[aria-expanded="true"] span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+        opacity: 0;
+      }
+      .menu-toggle[aria-expanded="true"] span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+      .mobile-nav {
+        display: none;
+        flex-direction: column;
+        border-top: 1px solid var(--color-surface);
+        padding: 8px 24px 20px;
+      }
+      .mobile-nav a {
+        padding-block: 12px;
+        font-size: 15px;
+        border-bottom: 1px solid var(--color-surface);
+      }
+      .mobile-nav a:last-child {
+        border-bottom: none;
+      }
+      .mobile-nav.is-open {
+        display: flex;
+      }
       .site-footer {
         background: var(--color-teal);
         margin-top: 96px;
@@ -172,7 +233,20 @@ const navLinks = [
         .site-nav {
           display: none;
         }
+        .menu-toggle {
+          display: flex;
+        }
       }
     </style>
+
+    <script>
+      const toggle = document.getElementById('menu-toggle');
+      const mobileNav = document.getElementById('mobile-nav');
+      toggle?.addEventListener('click', () => {
+        const isOpen = mobileNav?.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+      });
+    </script>
   </body>
 </html>
