@@ -1,11 +1,11 @@
 ---
-title: "SPARK — Supporting Participation, Active Rights and Knowledge"
+title: "SPARK: Supporting Participation, Active Rights and Knowledge"
 role: "Partner"
 status: "Upcoming"
 activity: "capacity-building"
-fundingProgramme: "Erasmus+ Youth — Small-scale partnerships in youth (KA210-YOU)"
+fundingProgramme: "Erasmus+ Youth: Small-scale partnerships in youth (KA210-YOU)"
 formId: "KA210-YOU-B0810DC2"
-summary: "SPARK is an 18-month partnership between youth organisations in Austria, the Netherlands and Belgium that trains youth workers to help young people with fewer opportunities — NEETs, migrants, refugees and minorities — take part in decisions that affect their lives. Around 60 young people in Linz, Workum and Antwerp take part in local participation workshops, and the partnership produces an open-access toolkit for youth workers across Europe. Solidara leads the Transnational Youth Worker Training."
+summary: "SPARK is an 18-month partnership between youth organisations in Austria, the Netherlands and Belgium that trains youth workers to help young people with fewer opportunities (NEETs, migrants, refugees and minorities) take part in decisions that affect their lives. Around 60 young people in Linz, Workum and Antwerp take part in local participation workshops, and the partnership produces an open-access toolkit for youth workers across Europe. Solidara leads the Transnational Youth Worker Training."
 coordinator: "Student Network of Linz (SNL), Austria"
 partners:
   - name: "Student Network of Linz (SNL)"
@@ -30,10 +30,10 @@ budgetTotal: "€60,000"
 budgetPublish: false
 targetGroup: "Around 60 young people aged 16–30 with fewer opportunities (NEETs, migrants, refugees, ethnic/cultural minorities) in Linz, Workum and Antwerp, plus 9 youth workers from the three partner organisations."
 keyActivities:
-  - "Kick-off meeting and coordination — Linz, Austria"
-  - "Transnational Youth Worker Training — Netherlands (led by Solidara)"
-  - "Production of the SPARK Toolkit — Austria"
+  - "Kick-off meeting and coordination, Linz, Austria"
+  - "Transnational Youth Worker Training, Netherlands (led by Solidara)"
+  - "Production of the SPARK Toolkit, Austria"
   - "Local Participation Workshops (Linz / Workum / Antwerp) plus an online open session"
-  - "Final Multiplier Event and SPARK Toolkit launch — Brussels"
+  - "Final Multiplier Event and SPARK Toolkit launch, Brussels"
 image: "/images/project-spark.jpg"
 ---

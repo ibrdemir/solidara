@@ -76,7 +76,7 @@ function formatDate(dateString) {
               {p.partners.map((partner) => (
                 <span class="partner-line">
                   {partner.name}
-                  {partner.country ? ` — ${partner.country}` : ''}
+                  {partner.country ? `, ${partner.country}` : ''}
                   {partner.note ? ` (${partner.note})` : ''}
                 </span>
               ))}

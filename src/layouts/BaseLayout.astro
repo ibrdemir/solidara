@@ -38,7 +38,7 @@ const navLinks = [
     <header class="site-header">
       <div class="container header-inner">
         <a href="/" class="logo-link">
-          <img src="/images/logo.jpg" alt="Stichting Solidara" width="140" />
+          <img src="/images/logo.jpg" alt="Stichting Solidara" class="site-logo" width="220" />
         </a>
         <nav class="site-nav">
           {navLinks.map((link) => (
@@ -81,23 +81,29 @@ const navLinks = [
         </nav>
         <div class="footer-social">
           <a href="#" aria-label="Solidara on Facebook" target="_blank" rel="noopener noreferrer">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
               <rect x="2" y="2" width="20" height="20" rx="6" />
               <text x="12" y="16.5" text-anchor="middle" font-size="12" font-weight="600" fill="currentColor" stroke="none">f</text>
             </svg>
           </a>
-          <a href="#" aria-label="Solidara on Instagram" target="_blank" rel="noopener noreferrer">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <a href="https://www.instagram.com/stichtingsolidara" aria-label="Solidara on Instagram" target="_blank" rel="noopener noreferrer">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
               <rect x="2" y="2" width="20" height="20" rx="6" />
               <circle cx="12" cy="12" r="4.2" />
               <circle cx="16.3" cy="7.7" r="1" fill="currentColor" stroke="none" />
             </svg>
           </a>
           <a href="#" aria-label="Solidara on X" target="_blank" rel="noopener noreferrer">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
               <rect x="2" y="2" width="20" height="20" rx="6" />
               <line x1="8" y1="8" x2="16" y2="16" />
               <line x1="16" y1="8" x2="8" y2="16" />
+            </svg>
+          </a>
+          <a href="#" aria-label="Solidara on LinkedIn" target="_blank" rel="noopener noreferrer">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="2" y="2" width="20" height="20" rx="6" />
+              <text x="12" y="16.5" text-anchor="middle" font-size="10.5" font-weight="600" fill="currentColor" stroke="none">in</text>
             </svg>
           </a>
         </div>
@@ -119,10 +125,14 @@ const navLinks = [
       .logo-link img {
         background: transparent;
       }
+      .site-logo {
+        width: 220px;
+        height: auto;
+      }
       .site-nav {
         display: flex;
         gap: 28px;
-        font-size: 14px;
+        font-size: 16px;
       }
       .site-nav a:hover {
         color: var(--color-teal);
@@ -173,7 +183,7 @@ const navLinks = [
         display: flex;
       }
       .site-footer {
-        background: var(--color-teal);
+        background: #007E8F;
         margin-top: 96px;
       }
       .footer-inner {
@@ -193,15 +203,15 @@ const navLinks = [
         font-family: var(--font-display);
         font-size: 20px;
         font-weight: 600;
-        color: var(--color-ink);
+        color: var(--color-white);
         margin: 0;
       }
       .footer-motto {
         font-family: var(--font-display);
         font-size: 15px;
         font-weight: 500;
-        color: var(--color-ink);
-        opacity: 0.85;
+        color: var(--color-white);
+        opacity: 0.9;
         margin: 0;
       }
       .footer-nav {
@@ -211,19 +221,19 @@ const navLinks = [
         font-size: 13px;
       }
       .footer-nav a {
-        color: var(--color-ink);
-        opacity: 0.75;
+        color: var(--color-white);
+        opacity: 0.85;
       }
       .footer-nav a:hover {
         opacity: 1;
       }
       .footer-social {
         display: flex;
-        gap: 12px;
+        gap: 14px;
       }
       .footer-social a {
-        color: var(--color-ink);
-        opacity: 0.75;
+        color: var(--color-white);
+        opacity: 0.9;
         display: inline-flex;
       }
       .footer-social a:hover {
@@ -235,6 +245,9 @@ const navLinks = [
         }
         .menu-toggle {
           display: flex;
+        }
+        .site-logo {
+          width: 160px;
         }
       }
     </style>
