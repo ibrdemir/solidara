@@ -34,6 +34,13 @@ function formatDate(dateString) {
         <span class="activity-tag">{activityLabels[p.activity]}</span>
       </div>
       <h1>{p.title}</h1>
+      {p.callToAction && (
+        <a class="cta-banner" href={p.callToAction.href}>
+          <span class="cta-label">{p.callToAction.label}</span>
+          <span class="cta-title">{p.callToAction.title} <span class="cta-arrow">&rarr;</span></span>
+          {p.callToAction.text && <span class="cta-text">{p.callToAction.text}</span>}
+        </a>
+      )}
     </div>
   </section>
 
@@ -142,6 +149,51 @@ function formatDate(dateString) {
       padding: 3px 10px;
       border-radius: 20px;
     }
+    .cta-banner {
+      display: block;
+      margin-top: 28px;
+      max-width: 720px;
+      padding: 28px 32px;
+      background: var(--color-surface);
+      border-left: 5px solid var(--color-terracotta);
+      border-radius: 4px 12px 12px 4px;
+      transition: background 0.15s ease;
+    }
+    .cta-banner:hover {
+      background: #e9f0f2;
+    }
+    .cta-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--color-terracotta);
+      margin-bottom: 10px;
+    }
+    .cta-title {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 36px;
+      line-height: 1.15;
+      color: var(--color-ink);
+    }
+    .cta-arrow {
+      color: var(--color-terracotta);
+      display: inline-block;
+      transition: transform 0.15s ease;
+    }
+    .cta-banner:hover .cta-arrow {
+      transform: translateX(6px);
+    }
+    .cta-text {
+      display: block;
+      margin-top: 12px;
+      font-size: 15px;
+      color: var(--color-slate);
+    }
+
     .project-header h1 {
       font-size: 30px;
       max-width: 700px;
@@ -239,6 +291,12 @@ function formatDate(dateString) {
     @media (max-width: 780px) {
       .content-grid {
         grid-template-columns: 1fr;
+      }
+      .cta-banner {
+        padding: 22px 20px;
+      }
+      .cta-title {
+        font-size: 26px;
       }
     }
   </style>

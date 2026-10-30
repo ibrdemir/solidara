@@ -1,0 +1,238 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const formUrl =
+  'https://docs.google.com/forms/d/e/1FAIpQLSeXCQpOVROZKxKAqS4xc7RrqYxdRtd54x9ObVt-fD1KJV62cA/viewform?usp=sharing';
+---
+
+<BaseLayout
+  title="Open call: Solidarity Lines"
+  description="Open call for young people (aged 18-21) living in the Netherlands to join a 10-day train journey in December 2026. All travel and accommodation costs are covered."
+>
+  <section class="call">
+    <div class="container narrow">
+      <p class="back">
+        <a href="/projects/solidarity-lines">&larr; Back to the project</a>
+      </p>
+
+      <h1>Open call for young people (aged 18–21) living in the Netherlands</h1>
+
+      <p class="lead">
+        In December 2026, the Solidara Foundation will take a group of 5
+        young people on a train journey. This trip is part of the Erasmus+
+        project "Solidarity Lines: Local Roots, European Routes"
+        (DiscoverEU). All travel and accommodation costs are covered by the
+        project.
+      </p>
+
+      <h2>The trip</h2>
+      <ul class="dot-list">
+        <li>
+          <span class="eyebrow-dot"></span>
+          <span>10 days, tentatively scheduled for December 8–17, 2026</span>
+        </li>
+        <li>
+          <span class="eyebrow-dot"></span>
+          <span>
+            Route: Workum – Amsterdam – Bruges – Lille – Brussels – Workum,
+            traveling entirely by train
+          </span>
+        </li>
+        <li>
+          <span class="eyebrow-dot"></span>
+          <span>
+            You will help plan the daily itinerary, accommodation, and safety
+            arrangements
+          </span>
+        </li>
+      </ul>
+
+      <h2>Who are we looking for?</h2>
+      <ul class="dot-list">
+        <li>
+          <span class="eyebrow-dot"></span>
+          <span>You are between 18 and 21 years old on the trip's start date</span>
+        </li>
+        <li>
+          <span class="eyebrow-dot"></span>
+          <span>You reside legally in the Netherlands</span>
+        </li>
+        <li>
+          <span class="eyebrow-dot"></span>
+          <span>You are eager to explore and learn together</span>
+        </li>
+      </ul>
+      <p>
+        Do you require any support, for example regarding accessibility or
+        health? Please let us know whenever you feel comfortable doing so;
+        all information will be handled confidentially.
+      </p>
+
+      <h2>What do we ask of you?</h2>
+      <ul class="dot-list">
+        <li>
+          <span class="eyebrow-dot"></span>
+          <span>
+            Participation in two preparatory meetings: one in-person
+            (tentatively Tuesday, November 24) and one online (tentatively
+            Thursday, December 3), plus a short personal conversation.
+          </span>
+        </li>
+        <li>
+          <span class="eyebrow-dot"></span>
+          <span>
+            You will travel with the group for the entire duration and attend
+            a follow-up/reflection session in January
+          </span>
+        </li>
+        <li>
+          <span class="eyebrow-dot"></span>
+          <span>You will be eligible to receive a "Youthpass"</span>
+        </li>
+        <li>
+          <span class="eyebrow-dot"></span>
+          <span>You must have a valid ID or passport.</span>
+        </li>
+        <li>
+          <span class="eyebrow-dot"></span>
+          <span>
+            You do not need to speak French or English. We will practice
+            useful phrases together. It will be fun!
+          </span>
+        </li>
+      </ul>
+
+      <h2>How to apply</h2>
+      <p>
+        Fill out the short form
+        <a class="inline-link" href={formUrl} target="_blank" rel="noopener noreferrer">here</a>.
+        No CV or grades required. We are interested in your motivation and
+        expectations.
+      </p>
+      <p>
+        Have questions? Please send an e-mail to
+        <a class="inline-link" href="mailto:info@solidara.org">info@solidara.org</a>.
+      </p>
+      <p>
+        <strong>Deadline:</strong> Friday, November 13, 2026, at 12:00 PM. We
+        will let you know by Wednesday, November 18, whether you have been
+        selected to join.
+      </p>
+      <p>
+        <strong>Privacy:</strong> We use your personal data solely for the
+        purpose of this selection process and the project itself. Any
+        information you share about yourself will be treated as
+        confidential.
+      </p>
+
+      <div class="apply-box">
+        <a class="button button-accent" href={formUrl} target="_blank" rel="noopener noreferrer">
+          Fill out the application form &rarr;
+        </a>
+      </div>
+
+      <div class="funding">
+        <img
+          src="/images/eu-erasmus-funding.png"
+          alt="Funded by the European Union, Erasmus+"
+          height="56"
+        />
+        <p>
+          Funded by the European Union. The views and opinions expressed are
+          those of the author(s) only and do not necessarily reflect those of
+          the European Union or the Netherlands Youth Institute (Nederlands
+          Jeugdinstituut). Neither the European Union nor the granting
+          authority can be held responsible for them.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .narrow {
+      max-width: 680px;
+    }
+    .call {
+      padding-block: 48px 96px;
+    }
+    .back {
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+    .back a {
+      color: var(--color-teal);
+      font-weight: 500;
+    }
+    .back a:hover {
+      text-decoration: underline;
+    }
+    .call h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    .lead {
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+    .call h2 {
+      font-size: 20px;
+      margin: 36px 0 14px;
+    }
+    .call p {
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+    .call strong {
+      color: var(--color-ink);
+      font-weight: 500;
+    }
+    .dot-list {
+      list-style: none;
+      margin: 0 0 16px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .dot-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+      color: var(--color-slate);
+    }
+    .dot-list .eyebrow-dot {
+      margin-top: 9px;
+      flex-shrink: 0;
+    }
+    .inline-link {
+      color: var(--color-teal);
+      font-weight: 500;
+      text-decoration: underline;
+    }
+    .apply-box {
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px solid var(--color-surface);
+    }
+    .button-accent {
+      background: var(--color-terracotta);
+      color: var(--color-white);
+    }
+    .funding {
+      margin-top: 56px;
+      padding-top: 32px;
+      border-top: 1px solid var(--color-surface);
+    }
+    .funding img {
+      height: 56px;
+      width: auto;
+      margin-bottom: 16px;
+      background: transparent;
+    }
+    .call .funding p {
+      font-size: 12px;
+      line-height: 1.6;
+    }
+  </style>
+</BaseLayout>

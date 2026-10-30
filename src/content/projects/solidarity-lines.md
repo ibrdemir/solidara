@@ -24,4 +24,9 @@ keyActivities:
   - "Daily reflection circles and DiscoverEU Companion journalling throughout each trip"
   - "Local follow-up and sharing of experiences in Workum after each mobility"
 image: "/images/project-solidarity-lines.jpg"
+callToAction:
+  label: "Open call"
+  title: "Apply to join the journey"
+  text: "For young people aged 18–21 living in the Netherlands. Deadline: Friday, 13 November 2026, 12:00."
+  href: "/projects/solidarity-lines/open-call"
 ---

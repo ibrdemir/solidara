@@ -37,6 +37,14 @@ const projects = defineCollection({
     targetGroup: z.string(),
     keyActivities: z.array(z.string()).default([]),
     image: z.string(),
+    callToAction: z
+      .object({
+        label: z.string(),
+        title: z.string(),
+        text: z.string().optional(),
+        href: z.string(),
+      })
+      .optional(),
   }),
 });
 
