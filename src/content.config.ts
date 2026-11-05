@@ -43,6 +43,8 @@ const projects = defineCollection({
         title: z.string(),
         text: z.string().optional(),
         href: z.string(),
+        hrefNl: z.string().optional(),
+        deadline: z.string().optional(),
       })
       .optional(),
   }),

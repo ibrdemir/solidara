@@ -29,4 +29,6 @@ callToAction:
   title: "Apply to join the journey"
   text: "For young people aged 18–21 living in the Netherlands. Deadline: Friday, 13 November 2026, 12:00."
   href: "/projects/solidarity-lines/open-call"
+  hrefNl: "/nl/projecten/solidarity-lines/oproep"
+  deadline: "2026-11-13T12:00:00+01:00"
 ---

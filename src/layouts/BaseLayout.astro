@@ -4,16 +4,26 @@ import '@fontsource/sora/500.css';
 import '@fontsource/sora/600.css';
 import '@fontsource/ibm-plex-sans/400.css';
 import '@fontsource/ibm-plex-sans/500.css';
+import { announcement } from '../data/announcement.js';
 
 interface Props {
   title: string;
   description?: string;
+  lang?: 'en' | 'nl';
+  showAnnouncement?: boolean;
+  alternates?: { en?: string; nl?: string };
 }
 
 const {
   title,
   description = "Solidara supports people's learning for life, through digital skills, sustainable living, active citizenship, and lifelong learning.",
+  lang = 'en',
+  showAnnouncement = true,
+  alternates,
 } = Astro.props;
+
+const bar = announcement[lang];
+const site = Astro.site ?? new URL('https://solidara.org');
 
 const navLinks = [
   { label: 'About us', href: '/about' },
@@ -26,15 +36,30 @@ const navLinks = [
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/images/logo.jpg" />
     <title>{title} · Solidara</title>
     <meta name="description" content={description} />
+    {alternates?.en && <link rel="alternate" hreflang="en" href={new URL(alternates.en, site).href} />}
+    {alternates?.nl && <link rel="alternate" hreflang="nl" href={new URL(alternates.nl, site).href} />}
   </head>
   <body>
+    {showAnnouncement && (
+      <div class="call-bar" id="call-bar" data-hide-after={announcement.hideAfter}>
+        <div class="container call-bar-inner">
+          <p>
+            <span class="call-bar-label">{bar.label}</span>
+            <span>{bar.text}</span>
+            <a class="call-bar-link" href={bar.href}>{bar.cta} &rarr;</a>
+          </p>
+          <a class="call-bar-switch" href={bar.switchHref} hreflang={lang === 'en' ? 'nl' : 'en'}>{bar.switchLabel}</a>
+          <button class="call-bar-close" id="call-bar-close" aria-label={lang === 'en' ? 'Close announcement' : 'Sluit melding'}>&times;</button>
+        </div>
+      </div>
+    )}
     <header class="site-header">
       <div class="container header-inner">
         <a href="/" class="logo-link">
@@ -111,6 +136,61 @@ const navLinks = [
     </footer>
 
     <style>
+      .call-bar {
+        background: var(--color-ink);
+        color: var(--color-white);
+        font-size: 14px;
+      }
+      .call-bar-inner {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding-block: 10px;
+      }
+      .call-bar-inner p {
+        flex: 1;
+        margin: 0;
+        color: var(--color-white);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 4px 10px;
+      }
+      .call-bar-label {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #F2A184;
+      }
+      .call-bar-link {
+        color: var(--color-white);
+        font-weight: 500;
+        text-decoration: underline;
+        white-space: nowrap;
+      }
+      .call-bar-switch {
+        color: var(--color-white);
+        opacity: 0.8;
+        font-size: 13px;
+        white-space: nowrap;
+      }
+      .call-bar-switch:hover {
+        opacity: 1;
+      }
+      .call-bar-close {
+        background: transparent;
+        border: none;
+        color: var(--color-white);
+        font-size: 22px;
+        line-height: 1;
+        cursor: pointer;
+        padding: 0 4px;
+        opacity: 0.8;
+      }
+      .call-bar-close:hover {
+        opacity: 1;
+      }
       .site-header {
         border-bottom: 1px solid var(--color-surface);
       }
@@ -259,6 +339,25 @@ const navLinks = [
         const isOpen = mobileNav?.classList.toggle('is-open');
         toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+      });
+
+      // Son tarihten sonra data-hide-after taşıyan her şeyi gizle
+      const now = Date.now();
+      document.querySelectorAll('[data-hide-after]').forEach((el) => {
+        const t = Date.parse(el.getAttribute('data-hide-after'));
+        if (!Number.isNaN(t) && now > t) el.style.display = 'none';
+      });
+
+      // Duyuru çubuğunu kapatma (hatırlanır)
+      const callBar = document.getElementById('call-bar');
+      try {
+        if (localStorage.getItem('callBarDismissed') === '1' && callBar) {
+          callBar.style.display = 'none';
+        }
+      } catch (e) {}
+      document.getElementById('call-bar-close')?.addEventListener('click', () => {
+        if (callBar) callBar.style.display = 'none';
+        try { localStorage.setItem('callBarDismissed', '1'); } catch (e) {}
       });
     </script>
   </body>

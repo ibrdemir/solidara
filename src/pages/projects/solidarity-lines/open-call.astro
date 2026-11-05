@@ -7,13 +7,20 @@ const formUrl =
 
 <BaseLayout
   title="Open call: Solidarity Lines"
-  description="Open call for young people (aged 18-21) living in the Netherlands to join a 10-day train journey in December 2026. All travel and accommodation costs are covered."
+  description="Open call for young people (aged 18-21) living in the Netherlands to join a 10-day train journey in December 2026. Travel and accommodation are covered."
+  lang="en"
+  showAnnouncement={false}
+  alternates={{ en: '/projects/solidarity-lines/open-call', nl: '/nl/projecten/solidarity-lines/oproep' }}
 >
   <section class="call">
     <div class="container narrow">
-      <p class="back">
-        <a href="/projects/solidarity-lines">&larr; Back to the project</a>
-      </p>
+      <div class="top-row">
+        <a class="back" href="/projects/solidarity-lines">&larr; Back to the project</a>
+        <p class="lang-switch">
+          <span aria-current="true">English</span>
+          <a href="/nl/projecten/solidarity-lines/oproep" hreflang="nl">Nederlands</a>
+        </p>
+      </div>
 
       <h1>Open call for young people (aged 18–21) living in the Netherlands</h1>
 
@@ -47,25 +54,69 @@ const formUrl =
         </li>
       </ul>
 
-      <h2>Who are we looking for?</h2>
+      <h2>Who is this for?</h2>
+      <p>
+        This trip is designed for young people who have had fewer chances to
+        travel or take part in international projects, and who would benefit
+        from some extra support. You don't have to prove anything. You tell
+        us as much as you wish to share.
+      </p>
+      <p class="list-intro">You can apply if:</p>
       <ul class="dot-list">
         <li>
           <span class="eyebrow-dot"></span>
-          <span>You are between 18 and 21 years old on the trip's start date</span>
+          <span>you are 18–21 years old on the trip's start date (8 December 2026)</span>
         </li>
         <li>
           <span class="eyebrow-dot"></span>
-          <span>You reside legally in the Netherlands</span>
+          <span>you live legally in the Netherlands, preferably in or around Workum</span>
         </li>
         <li>
           <span class="eyebrow-dot"></span>
-          <span>You are eager to explore and learn together</span>
+          <span>you haven't had the chance to experience a trip like this before</span>
+        </li>
+        <li>
+          <span class="eyebrow-dot"></span>
+          <span>you are eager to explore and learn together</span>
         </li>
       </ul>
       <p>
-        Do you require any support, for example regarding accessibility or
-        health? Please let us know whenever you feel comfortable doing so;
-        all information will be handled confidentially.
+        Do you need support, for example regarding accessibility or health?
+        Let us know whenever you feel comfortable. All information is handled
+        confidentially. Taking part is always voluntary.
+      </p>
+
+      <h2>How do we choose?</h2>
+      <p class="list-intro">We choose on clear criteria:</p>
+      <ol class="num-list">
+        <li>
+          You are 18–21 and would not easily be able to take part in
+          international travel on your own.
+        </li>
+        <li>
+          You face one or more barriers, for example economic, geographical,
+          social or related to confidence. You decide whether you tell us.
+        </li>
+        <li>You are motivated to learn and reflect together with a group.</li>
+        <li>
+          You can commit to the preparation meetings and the follow-up
+          session.
+        </li>
+      </ol>
+      <p>
+        If more people apply than there are places, we give priority to young
+        people who have never travelled abroad independently, who have
+        limited financial means, or for whom this trip would be a significant
+        first step. We also give a little priority to young people from
+        Workum and the surrounding region. We don't choose who has it
+        hardest. We choose who can benefit most from the support this project
+        offers. We aim for a balanced and diverse group, and all genders are
+        welcome.
+      </p>
+      <p>
+        We keep the process fair. You don't need a CV or grades. We document
+        our decisions, everyone who applies receives feedback, and what you
+        share about barriers stays confidential. There are 5 places.
       </p>
 
       <h2>What do we ask of you?</h2>
@@ -105,9 +156,9 @@ const formUrl =
       <h2>How to apply</h2>
       <p>
         Fill out the short form
-        <a class="inline-link" href={formUrl} target="_blank" rel="noopener noreferrer">here</a>.
-        No CV or grades required. We are interested in your motivation and
-        expectations.
+        <a class="inline-link" href={formUrl} target="_blank" rel="noopener noreferrer">here</a>
+        (you can choose English or Dutch at the start). We are interested in
+        your motivation and expectations.
       </p>
       <p>
         Have questions? Please send an e-mail to
@@ -155,15 +206,37 @@ const formUrl =
     .call {
       padding-block: 48px 96px;
     }
-    .back {
-      font-size: 13px;
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      flex-wrap: wrap;
       margin-bottom: 24px;
     }
-    .back a {
+    .back {
+      font-size: 13px;
       color: var(--color-teal);
       font-weight: 500;
     }
-    .back a:hover {
+    .back:hover {
+      text-decoration: underline;
+    }
+    .lang-switch {
+      display: flex;
+      gap: 14px;
+      margin: 0;
+      font-size: 13px;
+    }
+    .lang-switch span {
+      color: var(--color-ink);
+      font-weight: 500;
+    }
+    .lang-switch a {
+      color: var(--color-teal);
+      font-weight: 500;
+    }
+    .lang-switch a:hover {
       text-decoration: underline;
     }
     .call h1 {
@@ -181,6 +254,11 @@ const formUrl =
     .call p {
       font-size: 15px;
       margin-bottom: 14px;
+    }
+    .call .list-intro {
+      color: var(--color-ink);
+      font-weight: 500;
+      margin-bottom: 10px;
     }
     .call strong {
       color: var(--color-ink);
@@ -204,6 +282,39 @@ const formUrl =
     .dot-list .eyebrow-dot {
       margin-top: 9px;
       flex-shrink: 0;
+    }
+    .num-list {
+      list-style: none;
+      counter-reset: criteria;
+      margin: 0 0 18px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .num-list li {
+      counter-increment: criteria;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 15px;
+      color: var(--color-slate);
+    }
+    .num-list li::before {
+      content: counter(criteria);
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(0, 179, 204, 0.12);
+      color: var(--color-ink);
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: -1px;
     }
     .inline-link {
       color: var(--color-teal);

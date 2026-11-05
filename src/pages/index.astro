@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { announcement } from '../data/announcement.js';
 
 const teasers = [
   {
@@ -44,6 +45,23 @@ const teasers = [
       </div>
       <div class="hero-media">
         <img src="/images/hero-home.jpg" alt="People of different ages learning together at Solidara" width="800" height="533" />
+      </div>
+    </div>
+  </section>
+
+  <section class="call-card-section" data-hide-after={announcement.hideAfter}>
+    <div class="container">
+      <div class="call-card">
+        <a class="call-card-main" href={announcement.en.href}>
+          <span class="call-card-label">Open call</span>
+          <span class="call-card-title">Join a train journey through Europe <span class="call-card-arrow">&rarr;</span></span>
+          <span class="call-card-text">
+            Young people aged 18–21 can apply for 5 places on a 10-day journey
+            in December. Travel and accommodation are covered. Deadline:
+            13 November, 12:00.
+          </span>
+        </a>
+        <a class="call-card-switch" href={announcement.en.switchHref} hreflang="nl">Lees in het Nederlands &rarr;</a>
       </div>
     </div>
   </section>
@@ -96,6 +114,61 @@ const teasers = [
       aspect-ratio: 3 / 2;
       height: auto;
       object-fit: cover;
+    }
+
+    .call-card-section {
+      padding-block: 56px 0;
+    }
+    .call-card {
+      background: var(--color-surface);
+      border-left: 5px solid var(--color-terracotta);
+      border-radius: 4px 12px 12px 4px;
+      padding: 32px 36px;
+    }
+    .call-card-main {
+      display: block;
+    }
+    .call-card-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--color-terracotta);
+      margin-bottom: 10px;
+    }
+    .call-card-title {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 34px;
+      line-height: 1.15;
+      color: var(--color-ink);
+    }
+    .call-card-arrow {
+      color: var(--color-terracotta);
+      display: inline-block;
+      transition: transform 0.15s ease;
+    }
+    .call-card-main:hover .call-card-arrow {
+      transform: translateX(6px);
+    }
+    .call-card-text {
+      display: block;
+      margin-top: 12px;
+      max-width: 640px;
+      font-size: 16px;
+      color: var(--color-slate);
+    }
+    .call-card-switch {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-teal);
+    }
+    .call-card-switch:hover {
+      text-decoration: underline;
     }
 
     .teasers {
@@ -153,6 +226,12 @@ const teasers = [
     }
 
     @media (max-width: 860px) {
+      .call-card {
+        padding: 24px 20px;
+      }
+      .call-card-title {
+        font-size: 26px;
+      }
       .hero-inner {
         grid-template-columns: 1fr;
       }

@@ -35,11 +35,16 @@ function formatDate(dateString) {
       </div>
       <h1>{p.title}</h1>
       {p.callToAction && (
-        <a class="cta-banner" href={p.callToAction.href}>
-          <span class="cta-label">{p.callToAction.label}</span>
-          <span class="cta-title">{p.callToAction.title} <span class="cta-arrow">&rarr;</span></span>
-          {p.callToAction.text && <span class="cta-text">{p.callToAction.text}</span>}
-        </a>
+        <div class="cta-wrap" data-hide-after={p.callToAction.deadline}>
+          <a class="cta-banner" href={p.callToAction.href}>
+            <span class="cta-label">{p.callToAction.label}</span>
+            <span class="cta-title">{p.callToAction.title} <span class="cta-arrow">&rarr;</span></span>
+            {p.callToAction.text && <span class="cta-text">{p.callToAction.text}</span>}
+          </a>
+          {p.callToAction.hrefNl && (
+            <a class="cta-switch" href={p.callToAction.hrefNl} hreflang="nl">Lees in het Nederlands &rarr;</a>
+          )}
+        </div>
       )}
     </div>
   </section>
@@ -192,6 +197,16 @@ function formatDate(dateString) {
       margin-top: 12px;
       font-size: 15px;
       color: var(--color-slate);
+    }
+    .cta-switch {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-teal);
+    }
+    .cta-switch:hover {
+      text-decoration: underline;
     }
 
     .project-header h1 {
