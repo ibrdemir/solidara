@@ -5,6 +5,7 @@ import '@fontsource/sora/600.css';
 import '@fontsource/ibm-plex-sans/400.css';
 import '@fontsource/ibm-plex-sans/500.css';
 import { announcement } from '../data/announcement.js';
+import { getT, routes } from '../i18n/index.js';
 
 interface Props {
   title: string;
@@ -16,23 +17,31 @@ interface Props {
 
 const {
   title,
-  description = "Solidara supports people's learning for life, through digital skills, sustainable living, active citizenship, and lifelong learning.",
+  description: descriptionProp,
   lang = 'en',
   showAnnouncement = true,
   alternates,
 } = Astro.props;
 
+const t = getT(lang);
+const description = descriptionProp ?? t.defaultDescription;
 const bar = announcement[lang];
 const site = Astro.site ?? new URL('https://solidara.org');
 
 const navLinks = [
-  { label: 'About us', href: '/about' },
-  { label: 'Activities', href: '/activities' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Shape with us', href: '/shape-with-us' },
-  { label: 'News', href: '/news' },
-  { label: 'Contact us', href: '/contact' },
+  { label: t.nav.about, href: routes.about[lang] },
+  { label: t.nav.activities, href: routes.activities[lang] },
+  { label: t.nav.projects, href: routes.projects[lang] },
+  { label: t.nav.shape, href: routes.shape[lang] },
+  { label: t.nav.news, href: routes.news[lang] },
+  { label: t.nav.contact, href: routes.contact[lang] },
 ];
+
+// Dil değiştirici: aynı sayfanın diğer dildeki karşılığına gider
+const switchTo = {
+  en: alternates?.en ?? routes.home.en,
+  nl: alternates?.nl ?? routes.home.nl,
+};
 ---
 
 <!doctype html>
@@ -50,37 +59,47 @@ const navLinks = [
     {showAnnouncement && (
       <div class="call-bar" id="call-bar" data-hide-after={announcement.hideAfter}>
         <div class="container call-bar-inner">
-          <p>
+          <p class="call-bar-text">
             <span class="call-bar-label">{bar.label}</span>
-            <span>{bar.text}</span>
-            <a class="call-bar-link" href={bar.href}>{bar.cta} &rarr;</a>
+            <span class="call-bar-msg">{bar.text}</span>
           </p>
-          <a class="call-bar-switch" href={bar.switchHref} hreflang={lang === 'en' ? 'nl' : 'en'}>{bar.switchLabel}</a>
+          <div class="call-bar-actions">
+            <a class="call-bar-link" href={bar.href}>{bar.cta} &rarr;</a>
+            <a class="call-bar-switch" href={bar.switchHref} hreflang={lang === 'en' ? 'nl' : 'en'}>{bar.switchLabel}</a>
+          </div>
           <button class="call-bar-close" id="call-bar-close" aria-label={lang === 'en' ? 'Close announcement' : 'Sluit melding'}>&times;</button>
         </div>
       </div>
     )}
     <header class="site-header">
       <div class="container header-inner">
-        <a href="/" class="logo-link">
-          <img src="/images/logo.jpg" alt="Stichting Solidara" class="site-logo" width="220" />
+        <a href={routes.home[lang]} class="logo-link">
+          <img src="/images/logo.jpg" alt={t.ui.logoAlt} class="site-logo" width="220" />
         </a>
-        <nav class="site-nav">
-          {navLinks.map((link) => (
-            <a href={link.href}>{link.label}</a>
-          ))}
-        </nav>
-        <button
-          class="menu-toggle"
-          id="menu-toggle"
-          aria-label="Open menu"
-          aria-expanded="false"
-          aria-controls="mobile-nav"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+        <div class="header-right">
+          <nav class="site-nav">
+            {navLinks.map((link) => (
+              <a href={link.href}>{link.label}</a>
+            ))}
+          </nav>
+          <nav class="lang-switch" aria-label={t.ui.languageLabel}>
+            <a href={switchTo.en} lang="en" hreflang="en" aria-current={lang === 'en' ? 'true' : undefined}>EN</a>
+            <a href={switchTo.nl} lang="nl" hreflang="nl" aria-current={lang === 'nl' ? 'true' : undefined}>NL</a>
+          </nav>
+          <button
+            class="menu-toggle"
+            id="menu-toggle"
+            aria-label={t.ui.openMenu}
+            data-open-label={t.ui.openMenu}
+            data-close-label={t.ui.closeMenu}
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
       </div>
       <nav class="mobile-nav" id="mobile-nav">
         {navLinks.map((link) => (
@@ -97,7 +116,7 @@ const navLinks = [
       <div class="container footer-inner">
         <div class="footer-brand-block">
           <p class="footer-name">Solidara</p>
-          <p class="footer-motto">People first, at every stage of life.</p>
+          <p class="footer-motto">{t.footer.motto}</p>
         </div>
         <nav class="footer-nav">
           {navLinks.map((link) => (
@@ -139,50 +158,79 @@ const navLinks = [
       .call-bar {
         background: var(--color-ink);
         color: var(--color-white);
-        font-size: 14px;
       }
       .call-bar-inner {
+        position: relative;
         display: flex;
         align-items: center;
-        gap: 16px;
-        padding-block: 10px;
+        flex-wrap: wrap;
+        gap: 16px 32px;
+        padding-block: 20px;
+        padding-right: 56px;
       }
-      .call-bar-inner p {
-        flex: 1;
+      .call-bar-text {
+        flex: 1 1 420px;
         margin: 0;
-        color: var(--color-white);
         display: flex;
         flex-wrap: wrap;
-        align-items: baseline;
-        gap: 4px 10px;
+        align-items: center;
+        gap: 10px 16px;
+        color: var(--color-white);
       }
       .call-bar-label {
-        font-size: 11px;
-        font-weight: 500;
-        letter-spacing: 0.05em;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
         text-transform: uppercase;
-        color: #F2A184;
+        color: var(--color-ink);
+        background: #F2A184;
+        padding: 5px 14px;
+        border-radius: 20px;
+        white-space: nowrap;
+      }
+      .call-bar-msg {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 1.3;
+        color: var(--color-white);
+      }
+      .call-bar-actions {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px 20px;
       }
       .call-bar-link {
-        color: var(--color-white);
+        background: var(--color-white);
+        color: var(--color-ink);
         font-weight: 500;
-        text-decoration: underline;
+        font-size: 16px;
+        padding: 13px 24px;
+        border-radius: 8px;
         white-space: nowrap;
+      }
+      .call-bar-link:hover {
+        background: var(--color-surface);
       }
       .call-bar-switch {
         color: var(--color-white);
-        opacity: 0.8;
-        font-size: 13px;
+        opacity: 0.85;
+        font-size: 14px;
+        text-decoration: underline;
         white-space: nowrap;
       }
       .call-bar-switch:hover {
         opacity: 1;
       }
       .call-bar-close {
+        position: absolute;
+        top: 12px;
+        right: 24px;
         background: transparent;
         border: none;
         color: var(--color-white);
-        font-size: 22px;
+        font-size: 30px;
         line-height: 1;
         cursor: pointer;
         padding: 0 4px;
@@ -209,10 +257,33 @@ const navLinks = [
         width: 220px;
         height: auto;
       }
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+      }
       .site-nav {
         display: flex;
         gap: 28px;
         font-size: 16px;
+      }
+      .lang-switch {
+        display: flex;
+        gap: 4px;
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .lang-switch a {
+        padding: 4px 8px;
+        border-radius: 6px;
+        color: var(--color-slate);
+      }
+      .lang-switch a:hover {
+        color: var(--color-teal);
+      }
+      .lang-switch a[aria-current="true"] {
+        color: var(--color-ink);
+        background: var(--color-surface);
       }
       .site-nav a:hover {
         color: var(--color-teal);
@@ -329,6 +400,27 @@ const navLinks = [
         .site-logo {
           width: 160px;
         }
+        .header-right {
+          gap: 12px;
+        }
+        .call-bar-inner {
+          padding-block: 18px;
+          padding-right: 44px;
+          gap: 14px;
+        }
+        .call-bar-msg {
+          font-size: 18px;
+        }
+        .call-bar-actions {
+          width: 100%;
+        }
+        .call-bar-link {
+          flex: 1 1 auto;
+          text-align: center;
+        }
+        .call-bar-close {
+          right: 16px;
+        }
       }
     </style>
 
@@ -338,7 +430,10 @@ const navLinks = [
       toggle?.addEventListener('click', () => {
         const isOpen = mobileNav?.classList.toggle('is-open');
         toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+        toggle.setAttribute(
+          'aria-label',
+          isOpen ? toggle.dataset.closeLabel : toggle.dataset.openLabel
+        );
       });
 
       // Son tarihten sonra data-hide-after taşıyan her şeyi gizle

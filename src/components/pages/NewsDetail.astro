@@ -1,0 +1,110 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getT, routes, newsPath } from '../../i18n/index.js';
+
+const { item, lang = 'en' } = Astro.props;
+const t = getT(lang);
+const n = t.news;
+const { Content } = await render(item);
+
+const counterpart = await getEntry(lang === 'nl' ? 'news' : 'newsNl', item.id);
+const alternates = counterpart
+  ? { en: newsPath('en', item.id), nl: newsPath('nl', item.id) }
+  : undefined;
+
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString(t.dateLocale, { day: 'numeric', month: 'short', year: 'numeric' });
+}
+---
+
+<BaseLayout title={item.data.title} description={item.data.summary} lang={lang} alternates={alternates}>
+  <section class="news-article">
+    <div class="container narrow">
+      <div class="news-meta">
+        <time>{formatDate(item.data.date)}</time>
+        <span class={`category-tag category-${item.data.category.toLowerCase()}`}>
+          {n.category[item.data.category]}
+        </span>
+      </div>
+      <h1>{item.data.title}</h1>
+      <div class="article-body">
+        <Content />
+      </div>
+      <a class="back-link" href={routes.news[lang]}>&larr; {n.back}</a>
+    </div>
+  </section>
+
+  <style>
+    .news-article {
+      padding-block: 64px 96px;
+    }
+    .narrow {
+      max-width: 640px;
+    }
+    .news-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .news-meta time {
+      font-size: 13px;
+      color: var(--color-slate);
+    }
+    .category-tag {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .category-news {
+      color: var(--color-slate);
+      background: var(--color-surface);
+    }
+    .category-article {
+      color: var(--color-teal);
+      background: rgba(0, 179, 204, 0.1);
+    }
+    .category-call {
+      color: var(--color-terracotta);
+      background: rgba(232, 115, 74, 0.1);
+    }
+    .news-article h1 {
+      font-size: 30px;
+      margin-bottom: 32px;
+    }
+    .article-body {
+      font-size: 16px;
+      line-height: 1.75;
+    }
+    .article-body :global(p) {
+      color: var(--color-slate);
+      margin-bottom: 20px;
+    }
+    .article-body :global(a) {
+      color: var(--color-teal);
+      text-decoration: underline;
+    }
+    .article-body :global(ul),
+    .article-body :global(ol) {
+      color: var(--color-slate);
+      margin-bottom: 20px;
+      padding-left: 20px;
+    }
+    .article-body :global(strong) {
+      color: var(--color-ink);
+      font-weight: 500;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 24px;
+      font-size: 13px;
+      color: var(--color-teal);
+      font-weight: 500;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</BaseLayout>

@@ -1,0 +1,198 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getT, routes, alternatesFor } from '../../i18n/index.js';
+
+const { lang = 'en' } = Astro.props;
+const t = getT(lang);
+const s = t.shape;
+const f = s.form;
+---
+
+<BaseLayout title={s.title} description={s.description} lang={lang} alternates={alternatesFor('shape')}>
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <h1>{s.heading}</h1>
+        <p class="hero-lede">{s.lede}</p>
+      </div>
+      <div class="hero-media">
+        <img
+          src="/images/shape-with-us-door.jpg"
+          alt=""
+          width="1200"
+          height="900"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="doors">
+    <div class="container doors-grid">
+      {s.doors.map((door) => (
+        <div class="door-card">
+          <span class="eyebrow-dot"></span>
+          <h2>{door.heading}</h2>
+          <p>{door.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="how-we-work">
+    <div class="container narrow">
+      <h2>{s.howTitle}</h2>
+      {s.how.map((para) => <p>{para}</p>)}
+    </div>
+  </section>
+
+  <section class="contribution-form">
+    <div class="container narrow">
+      <h2>{s.formTitle}</h2>
+      <form name={s.formName} method="POST" data-netlify="true" netlify-honeypot="bot-field" action={routes.thanks[lang]}>
+        <input type="hidden" name="form-name" value={s.formName} />
+        <p class="hidden-field">
+          <label>{f.honeypot} <input name="bot-field" /></label>
+        </p>
+
+        <label for="name">{f.name}</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">{f.email}</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="who">{f.who}</label>
+        <select id="who" name="who" required>
+          <option value="">{f.select}</option>
+          {f.whoOptions.map((o) => <option value={o.value}>{o.label}</option>)}
+        </select>
+
+        <label for="about">{f.about}</label>
+        <select id="about" name="about" required>
+          <option value="">{f.select}</option>
+          {f.aboutOptions.map((o) => <option value={o.value}>{o.label}</option>)}
+        </select>
+
+        <label for="message">{f.message}</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit" class="button button-accent">{f.send}</button>
+      </form>
+    </div>
+  </section>
+
+  <style>
+    .hero {
+      padding-block: 64px 88px;
+      background: var(--color-surface);
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .hero-copy h1 {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+    .hero-lede {
+      font-size: 16px;
+      max-width: 460px;
+    }
+    .hero-media img {
+      border-radius: 12px;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .doors {
+      padding-block: 72px;
+    }
+    .doors-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .door-card h2 {
+      font-size: 18px;
+      margin: 14px 0 10px;
+    }
+    .door-card p {
+      font-size: 14px;
+    }
+
+    .how-we-work {
+      padding-block: 24px 72px;
+      border-top: 1px solid var(--color-surface);
+    }
+    .narrow {
+      max-width: 640px;
+    }
+    .how-we-work h2 {
+      font-size: 22px;
+      margin-bottom: 18px;
+    }
+    .how-we-work p {
+      font-size: 15px;
+      margin-bottom: 16px;
+    }
+
+    .contribution-form {
+      padding-block: 24px 96px;
+      border-top: 1px solid var(--color-surface);
+    }
+    .contribution-form h2 {
+      font-size: 22px;
+      margin-bottom: 24px;
+    }
+    .contribution-form form {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .contribution-form label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-ink);
+      margin-top: 16px;
+    }
+    .contribution-form input,
+    .contribution-form select,
+    .contribution-form textarea {
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--color-ink);
+      padding: 11px 14px;
+      border: 1px solid var(--color-surface);
+      border-radius: 8px;
+      background: var(--color-white);
+    }
+    .contribution-form input:focus,
+    .contribution-form select:focus,
+    .contribution-form textarea:focus {
+      outline: 2px solid var(--color-teal);
+      outline-offset: 1px;
+    }
+    .hidden-field {
+      position: absolute;
+      left: -5000px;
+    }
+    .button-accent {
+      margin-top: 28px;
+      background: var(--color-terracotta);
+      color: var(--color-white);
+      align-self: flex-start;
+    }
+
+    @media (max-width: 860px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+      .doors-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</BaseLayout>

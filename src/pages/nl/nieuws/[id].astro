@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content';
+import NewsDetail from '../../../components/pages/NewsDetail.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('newsNl');
+  return entries.map((entry) => ({
+    params: { id: entry.id },
+    props: { item: entry },
+  }));
+}
+
+const { item } = Astro.props;
+---
+
+<NewsDetail item={item} lang="nl" />

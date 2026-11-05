@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getT, alternatesFor } from '../../i18n/index.js';
+
+const { lang = 'en' } = Astro.props;
+const t = getT(lang);
+const a = t.activities;
+
+const images = [
+  '/images/activities-learning-mobilities.jpg',
+  '/images/activities-intergenerational.jpg',
+  '/images/activities-digital-skills.jpg',
+  '/images/activities-capacity-building.jpg',
+  '/images/activities-green-transition.jpg',
+  '/images/activities-active-citizenship.jpg',
+];
+const activities = a.items.map((item, i) => ({ ...item, image: images[i] }));
+---
+
+<BaseLayout title={a.title} description={a.description} lang={lang} alternates={alternatesFor('activities')}>
+  <section class="page-header">
+    <div class="container">
+      <h1>{a.heading}</h1>
+      {a.intro.map((para) => <p class="intro">{para}</p>)}
+    </div>
+  </section>
+
+  <section class="activity-list">
+    <div class="container">
+      {activities.map((activity, i) => (
+        <div class:list={['activity-row', { reverse: i % 2 === 1 }]}>
+          <div class="activity-media">
+            <img src={activity.image} alt="" width="1200" height="800" />
+          </div>
+          <div class="activity-body">
+            <span class="status-pill">{activity.status}</span>
+            <h2>
+              <span class="eyebrow-dot"></span>
+              {activity.heading}
+            </h2>
+            <p>{activity.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <style>
+    .page-header {
+      padding-block: 64px 24px;
+    }
+    .page-header h1 {
+      font-size: 34px;
+      margin-bottom: 24px;
+    }
+    .intro {
+      max-width: 560px;
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+
+    .activity-list {
+      padding-block: 24px 88px;
+    }
+    .activity-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      padding-block: 40px;
+      border-top: 1px solid var(--color-surface);
+    }
+    .activity-row.reverse .activity-media {
+      order: 2;
+    }
+    .activity-media img {
+      border-radius: 12px;
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      height: auto;
+      object-fit: cover;
+    }
+    .status-pill {
+      display: inline-block;
+      font-size: 12px;
+      color: var(--color-slate);
+      background: var(--color-surface);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    .activity-body h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    .activity-body p {
+      font-size: 14px;
+    }
+
+    @media (max-width: 780px) {
+      .activity-row,
+      .activity-row.reverse .activity-media {
+        grid-template-columns: 1fr;
+        order: initial;
+      }
+      .activity-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</BaseLayout>

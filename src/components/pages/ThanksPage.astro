@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getT, routes, alternatesFor } from '../../i18n/index.js';
+
+const { lang = 'en' } = Astro.props;
+const t = getT(lang);
+const k = t.thanks;
+---
+
+<BaseLayout title={k.title} description={k.description} lang={lang} alternates={alternatesFor('thanks')}>
+  <section class="thanks">
+    <div class="container narrow">
+      <h1>{k.heading}</h1>
+      <p>{k.text}</p>
+      <a class="button button-primary" href={routes.home[lang]}>{k.button}</a>
+    </div>
+  </section>
+
+  <style>
+    .thanks {
+      padding-block: 96px 120px;
+      text-align: left;
+    }
+    .narrow {
+      max-width: 560px;
+    }
+    .thanks h1 {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+    .thanks p {
+      font-size: 16px;
+      margin-bottom: 28px;
+    }
+  </style>
+</BaseLayout>
